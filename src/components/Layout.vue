@@ -1,5 +1,19 @@
 <template>
   <div class="layout">
+    <ul class="showcase">
+      <li>
+        <div class="seat available"></div>
+        <small>Available</small>
+      </li>
+      <li>
+        <div class="seat selected"></div>
+        <small>Selected</small>
+      </li>
+      <li>
+        <div class="seat occupied"></div>
+        <small>Occupied</small>
+      </li>
+    </ul>
     <div class="main-hall">
       <p>Main hall</p>
       <b-container class="rows">
@@ -107,6 +121,40 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.showcase {
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  padding: 20px 10px;
+  border-radius: 5px;
+  .showcase li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+  }
+
+  .showcase li small {
+    margin-left: 2px;
+  }
+  .seat {
+    background-color: lightgrey;
+    height: 40px;
+    width: 80px;
+    margin: 3px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  .available {
+    background-color: lightgreen;
+  }
+  .selected {
+    background-color: #0081cb;
+  }
+  .occupied {
+    background-color: red;
+  }
+}
 .main-hall {
   .seat {
     background-color: lightgrey;

@@ -50,7 +50,10 @@
       <pre class="m-0">{{ form }}</pre>
     </b-card> -->
     </div>
-    <h4>{{ rankSeats }} available seats for rank {{ form.rank }}</h4>
+    <h4 v-if="form.rank">
+      {{ rankSeats }} available seats for rank {{ form.rank }}
+    </h4>
+    <h4 v-else>Select a rank</h4>
   </div>
 </template>
 
@@ -87,10 +90,10 @@ export default {
     onReset(event) {
       event.preventDefault();
       // Reset our form values
-      this.form.email = "";
-      this.form.name = "";
-      this.form.food = null;
-      this.form.checked = [];
+      this.form.phoneNumber = "";
+      this.form.rank = "";
+      this.form.groupSize = null;
+      //   this.form.checked = [];
       // Trick to reset/clear native browser form validation state
       this.show = false;
       this.$nextTick(() => {
