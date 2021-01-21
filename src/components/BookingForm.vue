@@ -1,53 +1,64 @@
 <template>
-  <div class="form">
-    <b-form @submit="onSubmit" @reset="onReset" v-if="show" inline>
-      <b-form-group
-        id="input-group-1"
-        label="Phone number:"
-        label-for="input-1"
-      >
-        <b-form-input
-          id="input-1"
-          v-model="form.phoneNumber"
-          type="text"
-          placeholder="Enter phone number"
-          required
+  <div>
+    <div class="form">
+      <b-form @submit="onSubmit" @reset="onReset" v-if="show" inline>
+        <b-form-group
+          id="input-group-1"
+          label="Phone number:"
+          label-for="input-1"
         >
-        </b-form-input>
-      </b-form-group>
+          <b-form-input
+            id="input-1"
+            v-model="form.phoneNumber"
+            type="text"
+            placeholder="Enter phone number"
+            required
+          >
+          </b-form-input>
+        </b-form-group>
 
-      <b-form-group id="input-group-3" label="Rank:" label-for="input-3">
-        <b-form-select
-          id="input-3"
-          v-model="form.rank"
-          :options="ranks"
-          required
-        ></b-form-select>
-      </b-form-group>
+        <b-form-group id="input-group-3" label="Rank:" label-for="input-3">
+          <b-form-select
+            id="input-3"
+            v-model="form.rank"
+            @change="onChange"
+            :options="ranks"
+            required
+          ></b-form-select>
+        </b-form-group>
 
-      <b-form-group id="input-group-4" label="Group size:" label-for="input-4">
-        <b-form-input
-          id="input-4"
-          v-model="form.groupSize"
-          type="number"
-          :max="rankSeats"
-          placeholder="Enter group size"
-          required
+        <b-form-group
+          id="input-group-4"
+          label="Group size:"
+          label-for="input-4"
         >
-        </b-form-input>
-      </b-form-group>
+          <b-form-input
+            id="input-4"
+            v-model="form.groupSize"
+            type="number"
+            :max="rankSeats"
+            placeholder="Enter group size"
+            required
+          >
+          </b-form-input>
+        </b-form-group>
 
-      <b-button type="submit" variant="primary">Submit</b-button>
-      <b-button type="reset" variant="danger">Reset</b-button>
-    </b-form>
-    <b-card class="mt-3" header="Form Data Result">
+        <b-button type="submit" variant="primary">Submit</b-button>
+        <b-button type="reset" variant="danger">Reset</b-button>
+      </b-form>
+      <!-- <b-card class="mt-3" header="Form Data Result">
       <pre class="m-0">{{ form }}</pre>
-    </b-card>
+    </b-card> -->
+    </div>
+    <h4>{{ rankSeats }} available seats for rank {{ form.rank }}</h4>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    currentRank: Number,
+  },
   data() {
     return {
       form: {
@@ -58,10 +69,17 @@ export default {
       },
       ranks: [{ text: "Select One", value: null }, 1, 2, 3, 4, 5],
       show: true,
-      rankSeats: null,
+      rankSeats: 0,
     };
   },
   methods: {
+    onChange(event) {
+      if (event === 1 || event === 5) {
+        this.rankSeats = 10;
+      } else if (event === 2 || event === 3 || event === 4) {
+        this.rankSeats = 12;
+      }
+    },
     onSubmit(event) {
       event.preventDefault();
       alert(JSON.stringify(this.form));
@@ -79,14 +97,10 @@ export default {
         this.show = true;
       });
     },
-    selectRank() {
-      if (this.form.rank === 1 || this.form.rank === 5) {
+    selectRank(rank) {
+      if (rank === 1 || rank === 5) {
         this.rankSeats === 10;
-      } else if (
-        this.form.rank === 2 ||
-        this.form.rank === 3 ||
-        this.form.rank === 4
-      ) {
+      } else if (rank === 2 || rank === 3 || rank === 4) {
         this.rankSeats === 12;
       }
     },
