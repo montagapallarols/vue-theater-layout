@@ -17,9 +17,9 @@
           </b-form-input>
         </b-form-group>
 
-        <b-form-group id="input-group-3" label="Rank:" label-for="input-3">
+        <b-form-group id="input-group-2" label="Rank:" label-for="input-2">
           <b-form-select
-            id="input-3"
+            id="input-2"
             v-model="form.rank"
             @change="onChange"
             :options="ranks"
@@ -28,12 +28,12 @@
         </b-form-group>
 
         <b-form-group
-          id="input-group-4"
+          id="input-group-3"
           label="Group size:"
-          label-for="input-4"
+          label-for="input-3"
         >
           <b-form-input
-            id="input-4"
+            id="input-3"
             v-model="form.groupSize"
             type="number"
             :max="rankSeats"
@@ -114,8 +114,19 @@ export default {
 <style lang="scss" scoped>
 .form {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding-bottom: 50px;
+
+  #input-1,
+  #input-2,
+  #input-3 {
+    margin-left: 10px;
+    margin-right: 20px;
+  }
+  .btn {
+    margin: 5px;
+  }
 }
 </style>
