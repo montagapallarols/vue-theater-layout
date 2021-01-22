@@ -1,5 +1,6 @@
 <template>
   <div class="layout">
+    <p>{{ group }}</p>
     <ul class="showcase">
       <li>
         <div class="seat available"></div>
@@ -69,24 +70,6 @@
           <b-col class="seat">4</b-col>
           <b-col class="seat">2</b-col>
         </b-row>
-        <b-row class="row-7">
-          <p>Rank 4</p>
-          <b-col class="seat">1</b-col>
-          <b-col class="seat">3</b-col>
-          <b-col class="seat">5</b-col>
-          <b-col class="seat">6</b-col>
-          <b-col class="seat">4</b-col>
-          <b-col class="seat">2</b-col>
-        </b-row>
-        <b-row class="row-8">
-          <p>Rank 4</p>
-          <b-col class="seat">1</b-col>
-          <b-col class="seat">3</b-col>
-          <b-col class="seat">5</b-col>
-          <b-col class="seat">6</b-col>
-          <b-col class="seat">4</b-col>
-          <b-col class="seat">2</b-col>
-        </b-row>
       </b-container>
     </div>
     <br />
@@ -94,7 +77,7 @@
       <p>Balcony</p>
       <b-container class="rows">
         <b-row class="row-1 justify-content-md-center">
-          <p>Rank 5</p>
+          <p>Rank 4</p>
           <b-col class="seat">1</b-col>
           <b-col class="seat">3</b-col>
           <b-col class="seat">5</b-col>
@@ -102,7 +85,7 @@
           <b-col class="seat">2</b-col>
         </b-row>
         <b-row class="row-2 justify-content-md-center">
-          <p>Rank 5</p>
+          <p>Rank 4</p>
           <b-col class="seat">1</b-col>
           <b-col class="seat">3</b-col>
           <b-col class="seat">5</b-col>
@@ -116,7 +99,12 @@
 
 <script>
 export default {
-  data() {},
+  props: ["group"],
+  methods: {
+    getData() {
+      console.log(this.group);
+    },
+  },
 };
 </script>
 

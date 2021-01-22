@@ -9,7 +9,7 @@
         >
           <b-form-input
             id="input-1"
-            v-model="form.phoneNumber"
+            v-model="group.phoneNumber"
             type="text"
             placeholder="Enter phone number"
             required
@@ -20,7 +20,7 @@
         <b-form-group id="input-group-2" label="Rank:" label-for="input-2">
           <b-form-select
             id="input-2"
-            v-model="form.rank"
+            v-model="group.rank"
             @change="onChange"
             :options="ranks"
             required
@@ -34,7 +34,7 @@
         >
           <b-form-input
             id="input-3"
-            v-model="form.groupSize"
+            v-model="group.groupSize"
             type="number"
             :max="rankSeats"
             placeholder="Enter group size"
@@ -47,29 +47,30 @@
         <b-button type="reset" variant="danger">Reset</b-button>
       </b-form>
       <!-- <b-card class="mt-3" header="Form Data Result">
-      <pre class="m-0">{{ form }}</pre>
-    </b-card> -->
+        <pre class="m-0">{{ form }}</pre>
+      </b-card> -->
     </div>
-    <h4 v-if="form.rank">
-      {{ rankSeats }} available seats for rank {{ form.rank }}
-    </h4>
+    <h4 v-if="rank">{{ rankSeats }} available seats for rank {{ rank }}</h4>
     <h4 v-else>Select a rank</h4>
+    <Layout :group="group" />
   </div>
 </template>
 
 <script>
+import Layout from "./Layout";
+
 export default {
-  props: {
-    currentRank: Number,
-  },
+  name: "App",
+  components: { Layout },
+
   data() {
     return {
-      form: {
+      group: {
         phoneNumber: "",
         rank: null,
         groupSize: null,
-        checked: [],
       },
+
       ranks: [{ text: "Select One", value: null }, 1, 2, 3, 4, 5],
       show: true,
       rankSeats: 0,
@@ -85,14 +86,13 @@ export default {
     },
     onSubmit(event) {
       event.preventDefault();
-      alert(JSON.stringify(this.form));
     },
     onReset(event) {
       event.preventDefault();
       // Reset our form values
-      this.form.phoneNumber = "";
-      this.form.rank = "";
-      this.form.groupSize = null;
+      this.phoneNumber = "";
+      this.rank = "";
+      this.groupSize = null;
       //   this.form.checked = [];
       // Trick to reset/clear native browser form validation state
       this.show = false;
