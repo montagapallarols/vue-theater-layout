@@ -1,18 +1,15 @@
 <template>
   <div id="app">
     <BookingForm />
-    <!-- <Layout /> -->
   </div>
 </template>
 
 <script>
-// import Layout from "./components/Layout";
 import BookingForm from "./components/BookingForm";
 
 export default {
   name: "App",
   components: {
-    // Layout,
     BookingForm,
   },
 };

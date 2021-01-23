@@ -1,6 +1,5 @@
 <template>
   <div class="layout">
-    <p>{{ group }}</p>
     <ul class="showcase">
       <li>
         <div class="seat available"></div>
@@ -99,11 +98,34 @@
 
 <script>
 export default {
-  props: ["group"],
+  props: ["groups"],
+  data() {
+    return {
+      rank1: null,
+    };
+  },
   methods: {
-    getData() {
-      console.log(this.group);
+    getRank() {
+      const rank1 = this.groups.filter((g) => {
+        return (
+          g.seats
+            .map((s) => {
+              return s.row;
+            })
+            .includes("1") ||
+          g.seats
+            .map((s) => {
+              return s.row;
+            })
+            .includes("2")
+        );
+      });
+      this.rank1 = rank1;
     },
+    groupSeats() {},
+  },
+  mounted() {
+    this.getRank();
   },
 };
 </script>
@@ -157,9 +179,38 @@ export default {
       background-color: grey;
     }
   }
+  .seat-occupied {
+    background-color: red;
+    height: 50px;
+    width: 10px;
+    margin: 3px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: grey;
+    }
+  }
+  .row-1,
+  .row-2 {
+    background-color: #51c2d5;
+  }
+  .row-3,
+  .row-4 {
+    background-color: #8b5e83;
+  }
+  .row-5,
+  .row-6 {
+    background-color: #f6c065;
+  }
 }
 
 .balcony-1 {
+  .row-1,
+  .row-2 {
+    background-color: #cd5d7d;
+  }
   .seat {
     background-color: darkgrey;
     height: 50px;

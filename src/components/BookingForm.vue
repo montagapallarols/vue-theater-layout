@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="form">
+    <!-- <div class="form">
       <b-form @submit="onSubmit" @reset="onReset" v-if="show" inline>
         <b-form-group
           id="input-group-1"
@@ -9,7 +9,7 @@
         >
           <b-form-input
             id="input-1"
-            v-model="group.phoneNumber"
+            v-model="groups.phoneNumber"
             type="text"
             placeholder="Enter phone number"
             required
@@ -20,7 +20,7 @@
         <b-form-group id="input-group-2" label="Rank:" label-for="input-2">
           <b-form-select
             id="input-2"
-            v-model="group.rank"
+            v-model="groups.rank"
             @change="onChange"
             :options="ranks"
             required
@@ -34,7 +34,7 @@
         >
           <b-form-input
             id="input-3"
-            v-model="group.groupSize"
+            v-model="groups.groupSize"
             type="number"
             :max="rankSeats"
             placeholder="Enter group size"
@@ -46,13 +46,10 @@
         <b-button type="submit" variant="primary">Submit</b-button>
         <b-button type="reset" variant="danger">Reset</b-button>
       </b-form>
-      <!-- <b-card class="mt-3" header="Form Data Result">
-        <pre class="m-0">{{ form }}</pre>
-      </b-card> -->
     </div>
     <h4 v-if="rank">{{ rankSeats }} available seats for rank {{ rank }}</h4>
-    <h4 v-else>Select a rank</h4>
-    <Layout :group="group" />
+    <h4 v-else>Select a rank</h4> -->
+    <Layout :groups="groups" />
   </div>
 </template>
 
@@ -60,20 +57,44 @@
 import Layout from "./Layout";
 
 export default {
-  name: "App",
   components: { Layout },
 
   data() {
     return {
-      group: {
-        phoneNumber: "",
-        rank: null,
-        groupSize: null,
-      },
+      groups: [
+        {
+          id: "+31611111111",
+          seats: [
+            { section: "main hall", row: "1", seat: "4" },
+            { section: "main hall", row: "1", seat: "2" },
+            { section: "main hall", row: "2", seat: "2" },
+            { section: "main hall", row: "2", seat: "4" },
+          ],
+        },
+        {
+          id: "+31622222222",
+          seats: [
+            { section: "main hall", row: "2", seat: "6" },
+            { section: "main hall", row: "2", seat: "5" },
+          ],
+        },
+        {
+          id: "+31633333333",
+          seats: [
+            { section: "balcony", row: "7", seat: "4" },
+            { section: "balcony", row: "7", seat: "5" },
+          ],
+        },
+      ],
+      //   groups: [{
+      //     phoneNumber: "",
+      //     rank: null,
+      //     groupSize: null,
+      //   }],
 
-      ranks: [{ text: "Select One", value: null }, 1, 2, 3, 4, 5],
-      show: true,
-      rankSeats: 0,
+      //   ranks: [{ text: "Select One", value: null }, 1, 2, 3, 4],
+      //   show: true,
+      //   rankSeats: 0,
     };
   },
   methods: {

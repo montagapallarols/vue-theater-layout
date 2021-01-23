@@ -18,3 +18,5 @@ SELECT SEATS:
 - User can add group together or across 2 rows
 - Group = id (phone number) / Num of seats
 - When user selects seats, bind classes to html to change colour
+
+- If seat is included in rank 1 -> red else grey
