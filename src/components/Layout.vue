@@ -6,15 +6,11 @@
         <small>Available</small>
       </li>
       <li>
-        <div class="seat selected"></div>
-        <small>Selected</small>
-      </li>
-      <li>
         <div class="seat occupied"></div>
         <small>Occupied</small>
       </li>
     </ul>
-    <!-- <div class="main-hall">
+    <div class="main-hall">
       <p>Main hall</p>
       <b-container class="rows">
         <b-row class="row-1 justify-content-md-center">
@@ -100,23 +96,6 @@
           <p>Row 8</p>
         </b-row>
       </b-container>
-    </div> -->
-    <div class="main-hall">
-      <p>Main hall</p>
-      <b-container class="rows">
-        <b-row class="row-1 justify-content-md-center">
-          <p>Rank 1</p>
-          <b-col col md="2" class="seat">1</b-col>
-
-          <p>Row 1</p>
-        </b-row>
-        <b-row class="row-2">
-          <p>Rank 1</p>
-          <b-col class="seat">1</b-col>
-
-          <p>Row 2</p>
-        </b-row>
-      </b-container>
     </div>
   </div>
 </template>
@@ -126,43 +105,26 @@ export default {
   props: ["groups"],
   data() {
     return {
-      rank1: null,
-      randomColours: null,
+      sortedGroups: [],
     };
   },
   methods: {
-    getRank() {
-      const rank1 = this.groups.filter((g) => {
-        return (
-          g.seats
-            .map((s) => {
-              return s.row;
-            })
-            .includes("1") ||
-          g.seats
-            .map((s) => {
-              return s.row;
-            })
-            .includes("2")
-        );
-      });
-      const rank1Colours = rank1.map((r) => {
+    sortGroups() {
+      const newGroup = this.groups.map((g) => {
         return {
-          ...r,
-          seatColour:
+          ...g,
+          colour:
             "#" +
             Math.random()
               .toString(16)
               .substr(-6),
         };
       });
-      console.log("rank color", rank1Colours);
-      this.rank1 = rank1Colours;
+      console.log("new group", newGroup);
     },
-    groupSeats() {},
   },
   mounted() {
-    this.getRank();
+    this.sortGroups();
   },
 };
 </script>
@@ -270,4 +232,32 @@ export default {
 .occupied {
   background-color: #fff;
 }
+
+// getRank() {
+//       const rank1 = this.groups.filter((g) => {
+//         return (
+//           g.seats
+//             .map((s) => {
+//               return s.row;
+//             })
+//             .includes("1") ||
+//           g.seats
+//             .map((s) => {
+//               return s.row;
+//             })
+//             .includes("2")
+//         );
+//       });
+//       const rank1Colours = rank1.map((r) => {
+//         return {
+//           ...r,
+//           seatColour:
+//             "#" +
+//             Math.random()
+//               .toString(16)
+//               .substr(-6),
+//         };
+//       });
+
+//       this.rank1 = rank1Colours;
 </style>
