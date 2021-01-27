@@ -106,7 +106,17 @@ export default {
   data() {
     return {
       groupsColour: [],
-      audience: [],
+      // audience: [],
+      audience: [
+        [{}, {}, {}, {}],
+        [{}, {}, {}, {}, {}, {}],
+        [{}, {}, {}, {}, {}, {}],
+        [{}, {}, {}, {}, {}, {}],
+        [{}, {}, {}, {}, {}, {}],
+        [{}, {}, {}, {}, {}, {}],
+        [{}, {}, {}, {}, {}, {}],
+        [{}, {}, {}, {}, {}, {}],
+      ],
     };
   },
   methods: {
@@ -137,17 +147,15 @@ export default {
       // Set up audience array with row, seat, colour
       groupSeatColour.map((g) => {
         g.seats.map((s) => {
-          const { row, seat, seatColour, section } = s;
+          const { row, seat } = s;
           const rowNumber = parseInt(row);
-          // const rowIndex = rowNumber - 1;
+          const rowIndex = rowNumber - 1;
 
           const seatNumber = parseInt(seat);
-          // const seatIndex = seatNumber - 1;
+          const seatIndex = seatNumber - 1;
+          // I need to add some logic here to fit the requested seat number layout
 
-          this.audience = [
-            ...this.audience,
-            { rowNumber, seatNumber, seatColour, section },
-          ];
+          this.audience[rowIndex][seatIndex] = s;
         });
       });
       console.log("audience", this.audience);

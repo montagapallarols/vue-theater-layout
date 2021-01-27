@@ -74,7 +74,7 @@ audience = [
 ]
 ]
 
-PROBLEM: What about unreserved seats?
+PROBLEM: unreserved seats?
 
 - Create a template-like audience array?
 
