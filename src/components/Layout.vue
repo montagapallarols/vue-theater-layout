@@ -106,6 +106,7 @@ export default {
   data() {
     return {
       groupsColour: [],
+      audience: [],
     };
   },
   methods: {
@@ -122,7 +123,7 @@ export default {
         };
       });
 
-      // Assign each reservation its group colour
+      // Assign each seat reservation its group colour
       const groupSeatColour = groupsWithColour.map((g) => {
         const seatObject = g.seats.map((s) => {
           return {
@@ -133,6 +134,23 @@ export default {
         return { ...g, seats: [...seatObject] };
       });
       console.log(groupSeatColour);
+      // Set up audience array with row, seat, colour
+      groupSeatColour.map((g) => {
+        g.seats.map((s) => {
+          const { row, seat, seatColour, section } = s;
+          const rowNumber = parseInt(row);
+          // const rowIndex = rowNumber - 1;
+
+          const seatNumber = parseInt(seat);
+          // const seatIndex = seatNumber - 1;
+
+          this.audience = [
+            ...this.audience,
+            { rowNumber, seatNumber, seatColour, section },
+          ];
+        });
+      });
+      console.log("audience", this.audience);
     },
   },
   mounted() {

@@ -40,8 +40,6 @@ group.seats.map(seat => seat.color = group.color)
 const audience = [[], [], [], [], [], [], [], []]
 (each array is one row -> array -1)
 
-2 dimensional array (array with arrays inside of it)
-
 array[1][0]
 
 5. Sort the seats by row
@@ -78,7 +76,7 @@ audience = [
 
 PROBLEM: What about unreserved seats?
 
-- Create a template like audience array?
+- Create a template-like audience array?
 
 const audience = [[{}, {}, {}], [{}, {}, {}], [{}, {}, {}]]
 
