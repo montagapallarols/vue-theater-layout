@@ -105,12 +105,13 @@ export default {
   props: ["groups"],
   data() {
     return {
-      sortedGroups: [],
+      groupsColour: [],
     };
   },
   methods: {
-    sortGroups() {
-      const newGroup = this.groups.map((g) => {
+    addColourToGroup() {
+      const groupsWithColour = this.groups.map((g) => {
+        // Assign each group a random colour
         return {
           ...g,
           colour:
@@ -120,11 +121,22 @@ export default {
               .substr(-6),
         };
       });
-      console.log("new group", newGroup);
+
+      // Assign each reservation its group colour
+      const groupSeatColour = groupsWithColour.map((g) => {
+        const seatObject = g.seats.map((s) => {
+          return {
+            ...s,
+            seatColour: g.colour,
+          };
+        });
+        return { ...g, seats: [...seatObject] };
+      });
+      console.log(groupSeatColour);
     },
   },
   mounted() {
-    this.sortGroups();
+    this.addColourToGroup();
   },
 };
 </script>
