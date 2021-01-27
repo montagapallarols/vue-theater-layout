@@ -97,13 +97,6 @@ reservation.color = group.color
 })
 })
 
-const array = ['a', 'b', 'c']
-
-array[1] = 'd'
-
-console.log(array)
-// ['a', 'd', 'c']
-
 [
 [ // row 1
 {}, // seat 1 (row 1)
@@ -121,3 +114,11 @@ console.log(array)
 {}
 ]
 ]
+
+audience.map(row => {
+row.map((seat, index) => {
+if (!seat) {
+seat.seat = index
+}
+})
+})

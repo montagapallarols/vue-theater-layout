@@ -10,7 +10,7 @@
         <small>Occupied</small>
       </li>
     </ul>
-    <div class="main-hall">
+    <!-- <div class="main-hall">
       <p>Main hall</p>
       <b-container class="rows">
         <b-row class="row-1 justify-content-md-center">
@@ -96,6 +96,16 @@
           <p>Row 8</p>
         </b-row>
       </b-container>
+    </div> -->
+
+    <div class="main-hall">
+      <b-container class="rows" v-for="(row, index) in audience" :key="index">
+        <p>{{ `Row ${audience.indexOf(row) + 1}` }}</p>
+        <b-row class="row-1" v-for="(seat, index) in row" :key="index">
+          <b-col v-if="seat.seat" class="seat-occupied">{{ seat.seat }}</b-col>
+          <b-col v-else class="seat">{{ row.indexOf(seat) + 1 }}</b-col>
+        </b-row>
+      </b-container>
     </div>
   </div>
 </template>
@@ -106,7 +116,6 @@ export default {
   data() {
     return {
       groupsColour: [],
-      // audience: [],
       audience: [
         [{}, {}, {}, {}],
         [{}, {}, {}, {}, {}, {}],
@@ -204,7 +213,7 @@ export default {
 }
 .main-hall {
   .seat {
-    background-color: lightgrey;
+    background-color: lightgreen;
     height: 50px;
     width: 10px;
     margin: 3px;
@@ -268,34 +277,6 @@ export default {
 }
 
 .occupied {
-  background-color: #fff;
+  background-color: green;
 }
-
-// getRank() {
-//       const rank1 = this.groups.filter((g) => {
-//         return (
-//           g.seats
-//             .map((s) => {
-//               return s.row;
-//             })
-//             .includes("1") ||
-//           g.seats
-//             .map((s) => {
-//               return s.row;
-//             })
-//             .includes("2")
-//         );
-//       });
-//       const rank1Colours = rank1.map((r) => {
-//         return {
-//           ...r,
-//           seatColour:
-//             "#" +
-//             Math.random()
-//               .toString(16)
-//               .substr(-6),
-//         };
-//       });
-
-//       this.rank1 = rank1Colours;
 </style>

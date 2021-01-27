@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <BookingForm />
+    <Booking />
   </div>
 </template>
 
 <script>
-import BookingForm from "./components/BookingForm";
+import Booking from "./components/Booking";
 
 export default {
   name: "App",
   components: {
-    BookingForm,
+    Booking,
   },
 };
 </script>
@@ -24,8 +24,5 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
   box-sizing: border-box;
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
 }
 </style>
