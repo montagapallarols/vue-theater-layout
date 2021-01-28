@@ -10,100 +10,20 @@
         <small>Occupied</small>
       </li>
     </ul>
-    <!-- <div class="main-hall">
-      <p>Main hall</p>
-      <b-container class="rows">
-        <b-row class="row-1 justify-content-md-center">
-          <p>Rank 1</p>
-          <b-col col md="2" class="seat">1</b-col>
-          <b-col col md="2" class="seat">3</b-col>
-          <b-col col md="2" class="seat">4</b-col>
-          <b-col col md="2" class="seat">2</b-col>
-          <p>Row 1</p>
-        </b-row>
-        <b-row class="row-2">
-          <p>Rank 1</p>
-          <b-col class="seat">1</b-col>
-          <b-col class="seat">3</b-col>
-          <b-col class="seat">5</b-col>
-          <b-col class="seat">6</b-col>
-          <b-col class="seat">4</b-col>
-          <b-col class="seat">2</b-col>
-          <p>Row 2</p>
-        </b-row>
-        <b-row class="row-3">
-          <p>Rank 2</p>
-          <b-col class="seat">1</b-col>
-          <b-col class="seat">3</b-col>
-          <b-col class="seat">5</b-col>
-          <b-col class="seat">6</b-col>
-          <b-col class="seat">4</b-col>
-          <b-col class="seat">2</b-col>
-          <p>Row 3</p>
-        </b-row>
-        <b-row class="row-4">
-          <p>Rank 2</p>
-          <b-col class="seat">1</b-col>
-          <b-col class="seat">3</b-col>
-          <b-col class="seat">5</b-col>
-          <b-col class="seat">6</b-col>
-          <b-col class="seat">4</b-col>
-          <b-col class="seat">2</b-col>
-          <p>Row 4</p>
-        </b-row>
-        <b-row class="row-5">
-          <p>Rank 3</p>
-          <b-col class="seat">1</b-col>
-          <b-col class="seat">3</b-col>
-          <b-col class="seat">5</b-col>
-          <b-col class="seat">6</b-col>
-          <b-col class="seat">4</b-col>
-          <b-col class="seat">2</b-col>
-          <p>Row 5</p>
-        </b-row>
-        <b-row class="row-6">
-          <p>Rank 3</p>
-          <b-col class="seat">1</b-col>
-          <b-col class="seat">3</b-col>
-          <b-col class="seat">5</b-col>
-          <b-col class="seat">6</b-col>
-          <b-col class="seat">4</b-col>
-          <b-col class="seat">2</b-col>
-          <p>Row 6</p>
-        </b-row>
-      </b-container>
-    </div>
-    <br />
-    <div class="balcony-1">
-      <p>Balcony</p>
-      <b-container class="rows">
-        <b-row class="row-7 justify-content-md-center">
-          <p>Rank 4</p>
-          <b-col class="seat">1</b-col>
-          <b-col class="seat">3</b-col>
-          <b-col class="seat">5</b-col>
-          <b-col class="seat">4</b-col>
-          <b-col class="seat">2</b-col>
-          <p>Row 7</p>
-        </b-row>
-        <b-row class="row-8 justify-content-md-center">
-          <p>Rank 4</p>
-          <b-col class="seat">1</b-col>
-          <b-col class="seat">3</b-col>
-          <b-col class="seat">5</b-col>
-          <b-col class="seat">4</b-col>
-          <b-col class="seat">2</b-col>
-          <p>Row 8</p>
-        </b-row>
-      </b-container>
-    </div> -->
 
     <div class="main-hall">
       <b-container class="rows" v-for="(row, index) in audience" :key="index">
         <p>{{ `Row ${audience.indexOf(row) + 1}` }}</p>
+
         <b-row class="row-1" v-for="(seat, index) in row" :key="index">
-          <b-col v-if="seat.seat" class="seat-occupied">{{ seat.seat }}</b-col>
-          <b-col v-else class="seat">{{ row.indexOf(seat) + 1 }}</b-col>
+          <b-col
+            v-if="seat.seat"
+            class="seat-occupied important"
+            :style="{ backgroundColor: seat.seatColour }"
+            >{{ seat.seat }} occupied {{ seat.seatColour }}</b-col
+          >
+
+          <b-col v-else class="seat"> {{ row.indexOf(seat) + 1 }} free </b-col>
         </b-row>
       </b-container>
     </div>
@@ -113,10 +33,9 @@
 <script>
 export default {
   props: ["groups"],
-  data() {
-    return {
-      groupsColour: [],
-      audience: [
+  computed: {
+    audience: function() {
+      const result = [
         [{}, {}, {}, {}],
         [{}, {}, {}, {}, {}, {}],
         [{}, {}, {}, {}, {}, {}],
@@ -125,11 +44,7 @@ export default {
         [{}, {}, {}, {}, {}, {}],
         [{}, {}, {}, {}, {}, {}],
         [{}, {}, {}, {}, {}, {}],
-      ],
-    };
-  },
-  methods: {
-    addColourToGroup() {
+      ];
       const groupsWithColour = this.groups.map((g) => {
         // Assign each group a random colour
         return {
@@ -152,10 +67,10 @@ export default {
         });
         return { ...g, seats: [...seatObject] };
       });
-      console.log(groupSeatColour);
       // Set up audience array with row, seat, colour
-      groupSeatColour.map((g) => {
-        g.seats.map((s) => {
+
+      groupSeatColour.forEach((g) => {
+        g.seats.forEach((s) => {
           const { row, seat } = s;
           const rowNumber = parseInt(row);
           const rowIndex = rowNumber - 1;
@@ -164,15 +79,14 @@ export default {
           const seatIndex = seatNumber - 1;
           // I need to add some logic here to fit the requested seat number layout
 
-          this.audience[rowIndex][seatIndex] = s;
+          result[rowIndex][seatIndex] = s;
         });
       });
-      console.log("audience", this.audience);
+      console.log("audience", result);
+      return result;
     },
   },
-  mounted() {
-    this.addColourToGroup();
-  },
+  methods: {},
 };
 </script>
 
