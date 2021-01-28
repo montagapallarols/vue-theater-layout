@@ -1,13 +1,28 @@
 <template>
   <div class="layout">
-    <h1>Stage</h1>
+    <h1>Theater layout</h1>
+    <h5>Ranks</h5>
+    <ul class="showcase">
+      <li>
+        <div class="rank1"></div>
+        <small>1</small>
+      </li>
+      <li>
+        <div class="seat rank2"></div>
+        <small>2</small>
+      </li>
+      <li>
+        <div class="seat rank3"></div>
+        <small>3</small>
+      </li>
+      <li>
+        <div class="seat rank4"></div>
+        <small>4</small>
+      </li>
+    </ul>
 
-    <b-container class="section">
-      <b-row
-        :class="getRank(index)"
-        v-for="(row, index) in audience"
-        :key="index"
-      >
+    <b-container class="section" v-for="(row, index) in audience" :key="index">
+      <b-row :class="getRank(index)">
         {{ `Row ${audience.indexOf(row) + 1}` }}
 
         <div v-for="(seat, index) in row" :key="index">
@@ -74,6 +89,7 @@ export default {
 
           const seatNumber = parseInt(seat);
           const seatIndex = seatNumber - 1;
+
           // I need to add some logic here to fit the requested seat number layout
           // I was going to create a table that follows the spicific order, and then assign each number from the table accordingly
 
@@ -103,6 +119,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+h1 {
+  padding-bottom: 10px;
+}
 .showcase {
   display: flex;
   justify-content: center;
@@ -113,30 +132,39 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 10px;
   }
 
   .showcase li small {
     margin-left: 2px;
   }
-  .seat {
-    background-color: lightgrey;
-    height: 40px;
-    width: 80px;
-    margin: 3px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+  .rank1 {
+    background-color: #f7f7e8;
+    height: 30px;
+    width: 30px;
   }
-  .available {
-    background-color: lightgreen;
+  .rank2 {
+    background-color: #ffdf91;
+    height: 30px;
+    width: 30px;
+  }
+  .rank3 {
+    background-color: #e7d9ea;
+    height: 30px;
+    width: 30px;
+  }
+  .rank4 {
+    background-color: #d0e8f2;
+    height: 30px;
+    width: 30px;
   }
 }
+
 .section {
-  display: grid;
   background-color: #a3d2ca;
+  display: grid;
   justify-content: center;
-  padding: 20px 10px;
-  border-radius: 5px;
+  padding: 10px 0px;
+
   .rank1 {
     background-color: #f7f7e8;
   }
@@ -150,7 +178,7 @@ export default {
     background-color: #d0e8f2;
   }
   .seat {
-    background-color: lightgreen;
+    background-color: #bbbbbb;
     height: 50px;
     width: 10px;
     margin: 3px;
