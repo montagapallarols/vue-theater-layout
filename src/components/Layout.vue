@@ -3,7 +3,11 @@
     <h1>Stage</h1>
 
     <b-container class="section">
-      <b-row class="seat-row" v-for="(row, index) in audience" :key="index">
+      <b-row
+        :class="getRank(index)"
+        v-for="(row, index) in audience"
+        :key="index"
+      >
         {{ `Row ${audience.indexOf(row) + 1}` }}
 
         <div v-for="(seat, index) in row" :key="index">
@@ -71,6 +75,7 @@ export default {
           const seatNumber = parseInt(seat);
           const seatIndex = seatNumber - 1;
           // I need to add some logic here to fit the requested seat number layout
+          // I was going to create a table that follows the spicific order, and then assign each number from the table accordingly
 
           result[rowIndex][seatIndex] = s;
         });
@@ -79,7 +84,21 @@ export default {
       return result;
     },
   },
-  methods: {},
+  methods: {
+    getRank(index) {
+      let rankClass = "";
+      if (index <= 1) {
+        rankClass = "rank1";
+      } else if (index <= 3) {
+        rankClass = "rank2";
+      } else if (index <= 5) {
+        rankClass = "rank3";
+      } else {
+        rankClass = "rank4";
+      }
+      return rankClass;
+    },
+  },
 };
 </script>
 
@@ -118,9 +137,18 @@ export default {
   justify-content: center;
   padding: 20px 10px;
   border-radius: 5px;
-  // .seat-row {
-  //   background-color: #f7f7e8;
-  // }
+  .rank1 {
+    background-color: #f7f7e8;
+  }
+  .rank2 {
+    background-color: #ffdf91;
+  }
+  .rank3 {
+    background-color: #e7d9ea;
+  }
+  .rank4 {
+    background-color: #d0e8f2;
+  }
   .seat {
     background-color: lightgreen;
     height: 50px;
