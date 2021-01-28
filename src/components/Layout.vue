@@ -176,24 +176,22 @@ h1 {
   }
   .seat {
     background-color: #bbbbbb;
-    height: 50px;
+    height: 40px;
     width: 10px;
     margin: 3px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    cursor: pointer;
 
     &:hover {
       background-color: grey;
     }
   }
   .seat-occupied {
-    height: 50px;
+    height: 40px;
     width: 10px;
     margin: 3px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    cursor: pointer;
 
     &:hover {
       background-color: grey;
