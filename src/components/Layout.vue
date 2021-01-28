@@ -1,32 +1,25 @@
 <template>
   <div class="layout">
-    <ul class="showcase">
-      <li>
-        <div class="seat available"></div>
-        <small>Available</small>
-      </li>
-      <li>
-        <div class="seat occupied"></div>
-        <small>Occupied</small>
-      </li>
-    </ul>
+    <h1>Stage</h1>
 
-    <div class="main-hall">
-      <b-container class="rows" v-for="(row, index) in audience" :key="index">
-        <p>{{ `Row ${audience.indexOf(row) + 1}` }}</p>
+    <b-container class="section">
+      <b-row class="seat-row" v-for="(row, index) in audience" :key="index">
+        {{ `Row ${audience.indexOf(row) + 1}` }}
 
-        <b-row class="row-1" v-for="(seat, index) in row" :key="index">
+        <div v-for="(seat, index) in row" :key="index">
           <b-col
             v-if="seat.seat"
-            class="seat-occupied important"
+            class="seat-occupied"
             :style="{ backgroundColor: seat.seatColour }"
-            >{{ seat.seat }} occupied {{ seat.seatColour }}</b-col
+            >{{ seat.seat }}</b-col
           >
 
-          <b-col v-else class="seat"> {{ row.indexOf(seat) + 1 }} free </b-col>
-        </b-row>
-      </b-container>
-    </div>
+          <b-col v-else class="seat">
+            {{ row.indexOf(seat) + 1 }}
+          </b-col>
+        </div>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
@@ -118,14 +111,16 @@ export default {
   .available {
     background-color: lightgreen;
   }
-  .selected {
-    background-color: #0081cb;
-  }
-  .occupied {
-    background-color: red;
-  }
 }
-.main-hall {
+.section {
+  display: grid;
+  background-color: #a3d2ca;
+  justify-content: center;
+  padding: 20px 10px;
+  border-radius: 5px;
+  // .seat-row {
+  //   background-color: #f7f7e8;
+  // }
   .seat {
     background-color: lightgreen;
     height: 50px;
@@ -140,7 +135,6 @@ export default {
     }
   }
   .seat-occupied {
-    background-color: red;
     height: 50px;
     width: 10px;
     margin: 3px;
@@ -152,45 +146,5 @@ export default {
       background-color: grey;
     }
   }
-  .row-1,
-  .row-2 {
-    background-color: #51c2d5;
-  }
-  .row-3,
-  .row-4 {
-    background-color: #c1a1d3;
-  }
-  .row-5,
-  .row-6 {
-    background-color: #f6c065;
-  }
-}
-
-.balcony-1 {
-  .row-7,
-  .row-8 {
-    background-color: #e5707e;
-  }
-  .seat {
-    background-color: darkgrey;
-    height: 50px;
-    width: 10px;
-    margin: 3px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    cursor: pointer;
-
-    &:hover {
-      background-color: grey;
-    }
-  }
-}
-
-.selected {
-  background-color: #0081cb;
-}
-
-.occupied {
-  background-color: green;
 }
 </style>
