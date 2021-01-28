@@ -5,9 +5,9 @@ A Vue app that gets sample data passed in and displays it.
 - The layout has different background colors for different ranks and shows which group is placed somewhere. 
 - Each group has a distinctive color.
 
-<img width="1198" alt="Screen Shot 2021-01-28 at 15 58 04" src="https://user-images.githubusercontent.com/64054997/106156697-289db900-6182-11eb-971a-bd1f17f746e1.png">
+<img width="1166" alt="Screen Shot 2021-01-28 at 18 18 32" src="https://user-images.githubusercontent.com/64054997/106174485-62c48600-6195-11eb-8df7-70bb0de4f915.png">
 
-<img width="692" alt="Screen Shot 2021-01-28 at 15 58 14" src="https://user-images.githubusercontent.com/64054997/106156725-32272100-6182-11eb-8306-f7caca7031c8.png">
+<img width="1170" alt="Screen Shot 2021-01-28 at 18 17 32" src="https://user-images.githubusercontent.com/64054997/106174528-6c4dee00-6195-11eb-80cd-0fe23957d5f9.png">
 
 
 
