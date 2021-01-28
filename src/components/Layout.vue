@@ -30,12 +30,9 @@
             v-if="seat.seat"
             class="seat-occupied"
             :style="{ backgroundColor: seat.seatColour }"
-            >{{ seat.seat }}</b-col
-          >
+          ></b-col>
 
-          <b-col v-else class="seat">
-            {{ row.indexOf(seat) + 1 }}
-          </b-col>
+          <b-col v-else class="seat"> </b-col>
         </div>
       </b-row>
     </b-container>
